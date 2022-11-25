@@ -2,20 +2,17 @@ name: Upgrade Requirements
 
 on:
   schedule:
-     - cron: "0 2 * * 5"
+     - cron: "* * * * *"
   workflow_dispatch:
      inputs:
        branch:
          description: 'Target branch to create requirements PR against'
-         required: true
+         required: false
          default: 'master'
 jobs:
    call-upgrade-python-requirements-workflow:
     with:
        branch: ${{ github.event.inputs.branch }}
-       team_reviewers: "arbi-bom"
-       email_address: arbi-bom@edx.org 
-       send_success_notification: false
     secrets:
        requirements_bot_github_token: ${{ secrets.REQUIREMENTS_BOT_GITHUB_TOKEN }}
        requirements_bot_github_email: ${{ secrets.REQUIREMENTS_BOT_GITHUB_EMAIL }}
